@@ -1,0 +1,36 @@
+{
+  "name": "com.modernwestern.tilt-simulator",
+  "version": "1.0.0",
+  "displayName": "Tilt Simulator",
+  "description": "Tilt a virtual phone from an editor window and feed the Input System's motion sensors with it: attitude, gravity, gyroscope and accelerometer. Test tilt, parallax and motion controls in Play mode without building to a device.",
+  "unity": "2022.3",
+  "category": "Input",
+  "keywords": [
+    "Input System",
+    "Sensors",
+    "Gyroscope",
+    "Accelerometer",
+    "Attitude",
+    "Tilt",
+    "Mobile",
+    "Simulator"
+  ],
+  "author": {
+    "name": "Modern Western",
+    "url": "https://github.com/ModernWestern/"
+  },
+  "repository": {
+    "url": "https://github.com/ModernWestern/unity.modernwestern.tilt-simulator-package.git",
+    "type": "git"
+  },
+  "dependencies": {
+    "com.unity.inputsystem": "1.7.0"
+  },
+  "samples": [
+    {
+      "displayName": "Tilt Demo",
+      "description": "A small scene that reacts to the sensors: parallax layers and a marble on a tray.",
+      "path": "Samples~/Tilt Demo"
+    }
+  ]
+}

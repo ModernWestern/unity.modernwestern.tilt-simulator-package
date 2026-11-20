@@ -1,0 +1,26 @@
+{
+    "name": "ModernWestern.TiltSimulator.Editor.Tests",
+    "rootNamespace": "ModernWestern.TiltSimulator.Tests",
+    "references": [
+        "ModernWestern.TiltSimulator.Editor",
+        "Unity.InputSystem",
+        "Unity.InputSystem.TestFramework",
+        "UnityEngine.TestRunner",
+        "UnityEditor.TestRunner"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [
+        "UNITY_INCLUDE_TESTS"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
