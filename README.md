@@ -1,90 +1,89 @@
 # Tilt Simulator
 
-Un teléfono virtual para el editor de Unity. Lo inclinas desde una ventana y los sensores de movimiento del Input System
-(orientación, gravedad, giroscopio y acelerómetro) leen ese teléfono como si fuera real. Así pruebas en Play mode los
-controles por inclinación, el paralaje y cualquier efecto que dependa del movimiento, sin compilar ni pasar nada a un
-teléfono.
+**English** · [Español](README.es.md)
 
-![El ejemplo Tilt Demo reaccionando al simulador](Documentation~/images/tilt-demo.gif)
+A virtual phone for the Unity editor. You tilt it from a window, and the Input System's motion sensors (attitude,
+gravity, gyroscope and accelerometer) read it as if it were a real one. Test tilt controls, parallax and any effect that
+depends on motion in Play mode, without building or deploying to a phone.
 
-- **Sensores de verdad, no un atajo:** agrega dispositivos virtuales `AttitudeSensor`, `GravitySensor`, `Gyroscope` y
-  `Accelerometer`. Tu juego los lee con `AttitudeSensor.current`, `GravitySensor.current` y compañía, igual que en el
-  teléfono. No hay que tocar su código ni agregar ramas `#if UNITY_EDITOR`.
-- **Se maneja con el mouse o el teclado:** arrastra sobre el recuadro o usa las flechas. *Rest* lo endereza, *Wiggle*
-  lo mece de lado a lado y *Nod* lo cabecea.
-- **Tres formas de sostenerlo:** en la mano (inclinado 40°, como al jugar), parado frente a ti o acostado en la mesa.
-- **Sensores a elección:** quita uno para probar qué hace tu juego en un teléfono que no lo tiene, como los que traen
-  acelerómetro pero no giroscopio.
-- **Respeta la orientación de la pantalla:** manda los valores en los ejes propios del dispositivo, como un teléfono, y
-  se ve bien en vertical y en horizontal, también al girar la pantalla con el Device Simulator.
-- **Se controla desde código:** sirve para tests automáticos y para grabar demos.
-- **Solo en el editor:** nada del paquete llega a una build.
+![The Tilt Demo sample reacting to the simulator](Documentation~/images/tilt-demo.gif)
 
-## Cuándo sirve
+- **Real sensors, not a shortcut:** it adds virtual `AttitudeSensor`, `GravitySensor`, `Gyroscope` and `Accelerometer`
+  devices. Your game reads them with `AttitudeSensor.current`, `GravitySensor.current` and so on, just like on a phone.
+  No changes to its code and no `#if UNITY_EDITOR` branches.
+- **Mouse or keyboard:** drag on the pad or use the arrow keys. *Rest* straightens it, *Wiggle* rocks it side to side
+  and *Nod* tips it back and forth.
+- **Three ways to hold it:** in the hand (leaning back 40°, as when playing), upright in front of you, or lying flat on
+  a table.
+- **Pick the sensors:** leave one out to see what your game does on a phone without it, such as the ones with an
+  accelerometer but no gyroscope.
+- **Respects the screen's orientation:** it sends the values in the device's own axes, like a phone, so it works in
+  portrait and landscape, and when you rotate the screen in the Device Simulator.
+- **Scriptable:** drive it from code for automated tests and for recording demos.
+- **Editor only:** nothing from the package ends up in a build.
 
-- **Paralaje y fondos que se mueven con el teléfono:** fondos por capas, tarjetas con brillo holográfico, menús que se
-  inclinan.
-- **Controles por inclinación:** laberintos con canica, juegos de carreras que se manejan girando el teléfono,
-  equilibrio, apuntar moviendo el teléfono.
-- **Efectos visuales que dependen del ángulo:** sombras, reflejos o luces que cambian según cómo se sostiene la
-  pantalla.
-- **Probar los casos difíciles:** el teléfono sin giroscopio, el juego en horizontal, el sensor que el juego apaga para
-  ahorrar batería, la vuelta a la posición de reposo.
-- **Iterar rápido:** ajustar sensibilidades, zonas muertas y filtros en Play mode sin esperar una build.
-- **Tests y grabaciones:** fijar una inclinación exacta desde un test o grabar una demo con movimientos que se repiten
-  siempre iguales.
+## When it helps
 
-No reemplaza probar en un teléfono real. El simulador no tiene el ruido ni la deriva de un sensor real, no simula
-sacudidas (aceleración lineal) y no sirve para el Input Manager antiguo (`UnityEngine.Input.gyro`,
-`Input.acceleration`). Solo funciona con el Input System.
+- **Parallax and backgrounds that move with the phone:** layered backgrounds, cards with a holographic shine, menus that
+  tilt.
+- **Tilt controls:** marble mazes, racing games steered by turning the phone, balance games, aiming by moving the phone.
+- **Visual effects that depend on the angle:** shadows, reflections or lights that change with how the screen is held.
+- **Testing the hard cases:** a phone without a gyroscope, the game in landscape, a sensor the game turns off to save
+  battery, the return to the rest position.
+- **Fast iteration:** tune sensitivities, dead zones and filters in Play mode instead of waiting for a build.
+- **Tests and recordings:** set an exact tilt from a test, or record a demo with moves that repeat exactly the same
+  every time.
 
-## Instalación
+It does not replace testing on a real phone. The simulator has no real sensor noise or drift, does not simulate shakes
+(linear acceleration), and does not work with the old Input Manager (`UnityEngine.Input.gyro`, `Input.acceleration`).
+It only works with the Input System.
 
-**Window → Package Manager → + → Add package from git URL…** con:
+## Installation
+
+**Window → Package Manager → + → Add package from git URL…** with:
 
 ```
 https://github.com/ModernWestern/unity.modernwestern.tilt-simulator-package.git
 ```
 
-O en `Packages/manifest.json`, fijando una versión:
+Or in `Packages/manifest.json`, pinned to a version:
 
 ```json
 "com.modernwestern.tilt-simulator": "https://github.com/ModernWestern/unity.modernwestern.tilt-simulator-package.git#v1.0.0"
 ```
 
-**Requisitos:** Unity 2022.3 o más nuevo, Input System 1.7.0 o más nuevo, y en **Project Settings → Player → Active
-Input Handling**, *Input System Package (New)* o *Both*.
+**Requirements:** Unity 2022.3 or newer, Input System 1.7.0 or newer, and **Project Settings → Player → Active Input
+Handling** set to *Input System Package (New)* or *Both*.
 
-## Cómo usarlo
+## How to use it
 
-1. Abre **Window → Analysis → Tilt Simulator**. La primera vez en cada sesión del editor, la ventana enciende el
-   teléfono virtual.
-2. Dale **Play**.
-3. Arrastra sobre el recuadro:
-   - **A la derecha**, el lado derecho del teléfono se aleja de ti. A la izquierda, se aleja el izquierdo.
-   - **Hacia arriba**, el borde de arriba se aleja de ti. Hacia abajo, se acerca.
-   - El punto morado marca la inclinación, hasta 60° por eje. El dibujo muestra el teléfono en perspectiva tal como lo
-     verías en la mano: su borde de arriba va en morado y el derecho en blanco.
-4. Con la ventana enfocada, las **flechas** lo mueven de 5° en 5°.
+1. Open **Window → Analysis → Tilt Simulator**. The first time in each editor session, the window turns the virtual
+   phone on.
+2. Press **Play**.
+3. Drag on the pad:
+   - **To the right**, the phone's right side moves away from you. To the left, the left side does.
+   - **Up**, the top edge moves away from you. Down, it comes closer.
+   - The purple dot marks the tilt, up to 60° per axis. The drawing shows the phone in perspective as you would see it
+     in your hand: its top edge in purple and its right edge in white.
+4. With the window focused, the **arrow keys** move it in 5° steps.
 
-![La ventana Tilt Simulator](Documentation~/images/window.png)
+![The Tilt Simulator window](Documentation~/images/window.png)
 
-| Control | Qué hace |
+| Control | What it does |
 |---|---|
-| **Simulate the phone's sensors** | Agrega los sensores virtuales. Apagado, los quita. |
-| **Held** | Cómo se sostiene antes de inclinarlo: *In Hand* (40° hacia atrás), *Upright* (parado) o *Flat* (en la mesa, boca arriba). |
-| **Sensors** | Qué sensores tiene el teléfono. Quitar uno equivale a un teléfono sin ese sensor. |
-| **Rest** / **Wiggle** / **Nod** | Lo endereza, lo mece de lado a lado una vez o lo cabecea una vez. |
-| Lecturas | Lo que lee cada sensor ahora, en los ejes de la pantalla. *(off)* indica que el juego apagó ese sensor. |
+| **Simulate the phone's sensors** | Adds the virtual sensors. Off, it removes them. |
+| **Held** | How the phone is held before tilting it: *In Hand* (leaning back 40°), *Upright* or *Flat* (on a table, face up). |
+| **Sensors** | Which sensors the phone has. Leaving one out is a phone without that sensor. |
+| **Rest** / **Wiggle** / **Nod** | Straightens it, rocks it side to side once, or tips it back and forth once. |
+| Readings | What each sensor reads now, in the screen's axes. *(off)* means the game turned that sensor off. |
 
-Así se ve con el borde de arriba alejado 30°: la gravedad pasa casi toda al eje z y la canica del ejemplo rueda hacia
-arriba.
+This is the top edge 30° away: gravity moves almost entirely to the z axis, and the sample's marble rolls up.
 
-![El borde de arriba alejado 30°](Documentation~/images/demo-top-away.png)
+![The top edge 30° away](Documentation~/images/demo-top-away.png)
 
-## Leer los sensores en tu juego
+## Reading the sensors in your game
 
-Igual que en un teléfono, cada sensor se enciende antes de leerlo:
+Just like on a phone, turn each sensor on before reading it:
 
 ```csharp
 using UnityEngine;
@@ -123,29 +122,29 @@ public sealed class TiltReader : MonoBehaviour
 }
 ```
 
-Los sensores virtuales arrancan encendidos para que puedas activar el simulador en plena partida. En un teléfono
-arrancan apagados, así que no te saltes el `EnableDevice`.
+The virtual sensors start on, so you can turn the simulator on in the middle of a session. On a phone they start off,
+so don't skip the `EnableDevice`.
 
-### Ejes y unidades
+### Axes and units
 
-| Sensor | Valor | Unidad | En reposo, en la mano |
+| Sensor | Value | Unit | At rest, in the hand |
 |---|---|---|---|
-| `AttitudeSensor.attitude` | orientación del teléfono | cuaternión (identidad: acostado boca arriba) | 50° desde acostado |
-| `GravitySensor.gravity` | gravedad | g (1 = 9,81 m/s²) | (0, -0,77, -0,64) |
-| `Accelerometer.acceleration` | aceleración; quieto, es la gravedad | g | (0, -0,77, -0,64) |
-| `Gyroscope.angularVelocity` | velocidad de giro | rad/s | (0, 0, 0) |
+| `AttitudeSensor.attitude` | the phone's orientation | quaternion (identity: lying flat, face up) | 50° from flat |
+| `GravitySensor.gravity` | gravity | g (1 = 9.81 m/s²) | (0, -0.77, -0.64) |
+| `Accelerometer.acceleration` | acceleration; held still, it is gravity | g | (0, -0.77, -0.64) |
+| `Gyroscope.angularVelocity` | turn rate | rad/s | (0, 0, 0) |
 
-Los ejes son los de la pantalla en vertical: **x** hacia la derecha, **y** hacia arriba y **z** saliendo de la pantalla
-hacia ti. Acostado boca arriba, la gravedad vale (0, 0, -1); parado frente a ti, (0, -1, 0).
+The axes are the portrait screen's: **x** to the right, **y** up and **z** out of the screen toward you. Lying flat,
+face up, gravity reads (0, 0, -1); upright in front of you, (0, -1, 0).
 
-**Orientación de la pantalla:** un teléfono manda sus valores en sus propios ejes, los de la pantalla en vertical,
-aunque el juego esté en horizontal, y el simulador hace lo mismo. Para tener los ejes de la pantalla en cualquier
-orientación, activa `InputSystem.settings.compensateForScreenOrientation` o gira los valores tú según
-`Screen.orientation`. Con el Device Simulator abierto y la pantalla girada, el resultado es igual al de un teléfono.
+**Screen orientation:** a phone sends its values in its own axes, the portrait screen's, even when the game runs in
+landscape, and the simulator does the same. To get the screen's axes in any orientation, turn on
+`InputSystem.settings.compensateForScreenOrientation` or rotate the values yourself by `Screen.orientation`. With the
+Device Simulator open and the screen rotated, you get the same result as on a phone.
 
-## Desde código y tests
+## From code and tests
 
-`TiltSimulator` controla el mismo teléfono que la ventana:
+`TiltSimulator` drives the same phone as the window:
 
 ```csharp
 using ModernWestern.TiltSimulator;
@@ -158,13 +157,13 @@ TiltSimulator.Tilt = new Vector2(25f, 0f);   // the right side 25° away
 TiltSimulator.Refresh();                     // send it now instead of on the next editor update
 ```
 
-- `Tilt`: grados desde la pose. **x** gira sobre la vertical de la pantalla (positivo: el lado derecho se aleja) e
-  **y** sobre su horizontal (positivo: el borde de arriba se aleja).
-- `Attitude`, `Gravity` y `AngularVelocity`: lo que lee el teléfono ahora, en los ejes de la pantalla.
-- `TiltMath`: la misma matemática sin estado, para tus propias pruebas.
-- El estado dura hasta cerrar el editor: sobrevive a entrar en Play mode y a las recargas de scripts.
+- `Tilt`: degrees from the pose. **x** turns about the screen's vertical (positive: the right side moves away) and **y**
+  about its horizontal (positive: the top edge moves away).
+- `Attitude`, `Gravity` and `AngularVelocity`: what the phone reads now, in the screen's axes.
+- `TiltMath`: the same math without state, for your own checks.
+- The state lasts until the editor closes: it survives entering Play mode and script reloads.
 
-En un test con `InputTestFixture`, el simulador agrega sus sensores al Input System de prueba:
+In a test with `InputTestFixture`, the simulator adds its sensors to the test's Input System:
 
 ```csharp
 [Test]
@@ -179,27 +178,27 @@ public void TippingRight_MovesTheMarbleRight()
 }
 ```
 
-## Ejemplo
+## Sample
 
-En **Package Manager → Tilt Simulator → Samples**, importa **Tilt Demo** y abre la escena `Tilt Demo`. Tiene colinas
-en capas que se desplazan con la inclinación (paralaje) y una canica que rueda en una bandeja. El código lee solo el
-Input System, así que funciona igual en un teléfono.
+In **Package Manager → Tilt Simulator → Samples**, import **Tilt Demo** and open the `Tilt Demo` scene. It has layered
+hills that shift with the tilt (parallax) and a marble that rolls on a tray. Its code only reads the Input System, so it
+works the same on a phone.
 
-![El lado derecho alejado 32°](Documentation~/images/demo-tipped.png)
+![The right side 32° away](Documentation~/images/demo-tipped.png)
 
-## Cómo funciona
+## How it works
 
-- Mientras está encendido, en cada actualización del editor (dentro y fuera de Play mode) calcula la orientación del
-  teléfono a partir de la pose y la inclinación. De ahí saca la gravedad y la velocidad de giro, las pasa a los ejes
-  del dispositivo y las manda como eventos de estado a los dispositivos virtuales. Cada uno queda como el `current` de
-  su tipo.
-- Los dispositivos se llaman `TiltSimulatorAttitude`, `TiltSimulatorGravity`, `TiltSimulatorGyroscope` y
-  `TiltSimulatorAccelerometer`, y aparecen en **Window → Analysis → Input Debugger**. Al apagar el simulador se quitan.
-- Contesta las consultas de frecuencia de muestreo (`Sensor.samplingFrequency`) como un sensor real. Sin esto, un
-  dispositivo virtual lanzaría una excepción.
-- Si el juego apaga un sensor con `DisableDevice`, el simulador deja de mandarle datos y ese sensor conserva su último
-  valor, como en un teléfono.
+- While it is on, on every editor update (in and out of Play mode) it works out the phone's orientation from the pose
+  and the tilt. From that it gets gravity and the turn rate, converts them to the device's axes and sends them as state
+  events to the virtual devices. Each one becomes the `current` device of its type.
+- The devices are named `TiltSimulatorAttitude`, `TiltSimulatorGravity`, `TiltSimulatorGyroscope` and
+  `TiltSimulatorAccelerometer`, and show up in **Window → Analysis → Input Debugger**. Turning the simulator off removes
+  them.
+- It answers sampling frequency queries (`Sensor.samplingFrequency`) like a real sensor. Without this, a virtual device
+  would throw an exception.
+- If the game turns a sensor off with `DisableDevice`, the simulator stops sending it data and the sensor keeps its last
+  value, as on a phone.
 
-## Licencia
+## License
 
 [MIT](LICENSE).
